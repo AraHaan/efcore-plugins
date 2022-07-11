@@ -1,0 +1,26 @@
+name: .NET (build)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_NOLOGO: true
+    steps:
+    - uses: actions/checkout@main
+
+    - name: Install latest .NET 6 SDK
+      uses: Elskom/setup-latest-dotnet@main
+      with:
+        VERSION_MAJOR: '6'
+        VERSION_BAND: '4xx'
+
+    - name: Restore, Build, and Pack
+      uses: Elskom/build-dotnet@main
+      with:
+        RESTORE: false

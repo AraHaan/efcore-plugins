@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <AssemblyName>AraHaan.EntityFrameworkCore.Plugins</AssemblyName>
+    <OutputPath>..\bin\$(Configuration)\</OutputPath>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/AraHaan/efcore-plugins</PackageProjectUrl>
+    <Description>
+Plugin that provides additional conventions for EntityFrameworkCore Relational and non-Relational databases.
+
+For additional convensions on top of the ones provided feel free to pull request them in on the project's repository.
+
+Note: Built on top of Microsoft.EntityFrameworkCore version 6.0.x.
+</Description>
+    <PackageReleaseNotes>Initial Release.</PackageReleaseNotes>
+    <Authors>AraHaan</Authors>
+    <Company>AraHaan</Company>
+    <Copyright>Copyright (c) 2022</Copyright>
+    <Version>1.0.0</Version>
+    <SuppressNETCoreSdkPreviewMessage Condition="'$(_NETCoreSdkIsPreview)' == 'true'">true</SuppressNETCoreSdkPreviewMessage>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!--
+        If the .NET SDK is a preview version disable it's built in version of the codestyle analyzer
+        and use the package version instead. This is due to an issue with using the .NET 7 preview
+        SDKs in Visual Studio 2022.
+    -->
+    <EnforceCodeStyleInBuild Condition="'$(_NETCoreSdkIsPreview)' == 'true' AND '$(BuildingInVisualStudio)' == 'true'">false</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>preview</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- <DebugType>embedded</DebugType> -->
+    <!-- We need to disable this. -->
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.Reflection" />
+    <Using Include="Microsoft.EntityFrameworkCore.Infrastructure" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata.Builders" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata.Conventions" />
+    <Using Include="Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure" />
+    <Using Include="Microsoft.EntityFrameworkCore.Storage.ValueConversion" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Microsoft.Extensions.DependencyInjection.Extensions" />
+    <PackageReference Include="IDisposableAnalyzers" Version="*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Condition="'$(_NETCoreSdkIsPreview)' == 'true' AND '$(BuildingInVisualStudio)' == 'true'" Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.6" />
+  </ItemGroup>
+
+</Project>
